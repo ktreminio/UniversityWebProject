@@ -37,6 +37,11 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Persistence.Repositor
             throw new NotImplementedException();
         }
 
+        public Task UpdateGradeForCourse(Guid studentId, Guid courseId, EnrollmentForUpdateDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task UpdateStudentAsync(Student student)
         {
             throw new NotImplementedException();
