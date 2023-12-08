@@ -27,8 +27,6 @@
     <Folder Include="Domain\Extensions\" />
     <Folder Include="Domain\Services\" />
     <Folder Include="Infrastructure\Http\EndpointHandlers\" />
-    <Folder Include="Infrastructure\Http\Extensions\" />
-    <Folder Include="Infrastructure\Http\Results\" />
     <Folder Include="Infrastructure\Security\" />
   </ItemGroup>
 
