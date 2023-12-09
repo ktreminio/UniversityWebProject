@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Json;
+﻿using Kevin.Treminio.University.Service.Infrastructure.Http.Helpers.LinksBuilders;
+using Microsoft.AspNetCore.Http.Json;
 using System.Text.Json;
 
 namespace Kevin.Treminio.University.Service.Infrastructure.Http.Extensions
@@ -13,7 +14,8 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Http.Extensions
                 options => { options.SerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase; }
             );
             services.AddSwaggerDocumentation();
-            services.AddScoped<IStu>
+            services.AddScoped<IStudentLinksBuilder, StudentLinksBuilder>();
+            services.AddAllowAllCORS();
         }
     }
 }

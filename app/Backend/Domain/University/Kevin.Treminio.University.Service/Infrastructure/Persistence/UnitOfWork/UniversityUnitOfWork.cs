@@ -5,22 +5,22 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Persistence.UnitOfWor
 {
     public class UniversityUnitOfWork : UnitOfWork
     {
-        public IStudentRepository Student { get; }
-        public IInstructorRepository Instructor { get; }
-        public ICourseRepository Course { get; }
+        public IStudentRepository Students { get; }
+        public IInstructorRepository Instructors { get; }
+        public ICourseRepository Courses { get; }
         public UniversityContext _context { get; }
 
         public UniversityUnitOfWork(
             UniversityContext context, 
-            IStudentRepository student, 
-            IInstructorRepository instructor, 
-            ICourseRepository course
+            IStudentRepository students, 
+            IInstructorRepository instructors, 
+            ICourseRepository courses
         ) : base(context)
         {
             _context = context;
-            Student = student;
-            Instructor = instructor;
-            Course = course;
+            Students = students;
+            Instructors = instructors;
+            Courses = courses;
         }
 
     }

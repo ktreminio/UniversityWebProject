@@ -1,5 +1,6 @@
-﻿using FluentValidation.Results;
+﻿
 using Kevin.Treminio.University.Service.Application.Dtos;
+using System.ComponentModel.DataAnnotations;
 
 namespace Kevin.Treminio.University.Service.Infrastructure.Http.Results.Students
 {

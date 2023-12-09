@@ -11,7 +11,8 @@ namespace Kevin.Treminio.University.Service.Domain.Interfaces
         Task UpdateGradeForCourse(Guid studentId, Guid courseId, EnrollmentForUpdateDto dto);
         Task DeleteStudentAsync(Student student);
         Task<Student> GetStudentAsync(Guid studentId);
-        Task<PagedList<Student>> GetAllAsync(StudentResourceParameters parameters);
+        Task<IEnumerable<Student>> GetStudentsAsync(IEnumerable<Guid> studentIds);
+        Task<PagedList<Student>> GetStudentsAsync(StudentResourceParameters parameters);
         Task UpdateStudentAsync(Student student);
         Task UpdateEnrollmentForStudentAsync(Enrollment enrollment);
     }

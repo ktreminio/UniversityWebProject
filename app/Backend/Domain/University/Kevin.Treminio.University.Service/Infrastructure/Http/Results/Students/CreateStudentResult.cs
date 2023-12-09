@@ -1,4 +1,4 @@
-﻿using FluentValidation.Results;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 
 namespace Kevin.Treminio.University.Service.Infrastructure.Http.Results.Students

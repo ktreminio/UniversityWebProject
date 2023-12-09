@@ -11,7 +11,7 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Http.Helpers.LinksBui
         string CreateStudentCollectionResourceUri(StudentResourceParameters studentResourceParameters, ResourceUriType type);
         PaginationMetadata GetPaginationMetadata(PagedList<Student> students, StudentResourceParameters studentResourceParameters);
         List<LinkDto> CreateDocumentationLinksForStudent(Guid studentId, string fields);
-        IEnumerable<IDictionary<string, object>> CreateDocumentationLinksForStudentShapeDate(IEnumerable<ExpandoObject> shapedStudents, StudentResourceParameters studentResourceParameters);
+        IEnumerable<IDictionary<string, object>> CreateDocumentationLinksForStudentShapeData(IEnumerable<ExpandoObject> shapedStudents, StudentResourceParameters studentResourceParameters);
         IEnumerable<LinkDto> CreatePagedLinksForStudnets(StudentResourceParameters studentResourceParameters, bool hasNext, bool hasPrevious);
     }
 }
