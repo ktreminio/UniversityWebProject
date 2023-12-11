@@ -5,6 +5,8 @@ using Kevin.Treminio.University.Service.Infrastructure.Persistence.Contexts;
 using Kevin.Treminio.University.Service.Infrastructure.Persistence.Extensions;
 using Kevin.Treminio.University.Service.Infrastructure.Persistence.Helpers.DataMapping.ModelMapping;
 using Kevin.Treminio.University.Service.Infrastructure.Persistence.Helpers.Paged;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace Kevin.Treminio.University.Service.Infrastructure.Persistence.Repositories
 {
@@ -22,29 +24,41 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Persistence.Repositor
             _studentPropertyMappingService = studentPropertyMappingService;
         }
 
-        public Task AddStudentAsync(Student student)
+        public async Task AddStudentAsync(Student student)
         {
-            throw new NotImplementedException();
+            await _context.Students.AddAsync(student);
         }
 
-        public Task AssignedCourseAsync(Guid studentId, Guid courseId)
+        public async Task AssignedCourseAsync(Guid studentId, Guid courseId)
         {
-            throw new NotImplementedException();
+            if (!_context.Enrollments.AnyAsync(e => e.StudentId == studentId && e.CourseId == courseId).Result)
+            {
+                var enrollment = new Enrollment
+                {
+                    StudentId = studentId,
+                    CourseId = courseId
+                };
+
+                await _context.Enrollments.AddAsync(enrollment);
+            }
         }
 
-        public Task DeleteStudentAsync(Student student)
+        public async Task DeleteStudentAsync(Student student)
         {
-            throw new NotImplementedException();
+            await Task.FromResult(_context.Students.Remove(student));
         }
 
         public Task<Student> GetStudentAsync(Guid studentId)
         {
-            throw new NotImplementedException();
+            return _context.Students.FirstOrDefaultAsync(s => s.StudentId == studentId);
         }
 
-        public Task<IEnumerable<Student>> GetStudentsAsync(IEnumerable<Guid> studentIds)
+        public async Task<IEnumerable<Student>> GetStudentsAsync(List<Guid> studentIds)
         {
-            throw new NotImplementedException();
+            return await _context.Students.Where(s => studentIds.Contains(s.StudentId))
+                .OrderBy(s => s.FirstName)
+                .OrderBy(s => s.LastName)
+                .ToListAsync();
         }
 
         public async Task<PagedList<Student>> GetStudentsAsync(StudentResourceParameters parameters)
@@ -81,9 +95,16 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Persistence.Repositor
             throw new NotImplementedException();
         }
 
-        public Task UpdateStudentAsync(Student student)
+        public async Task UpdateStudentAsync(Student student)
         {
-            throw new NotImplementedException();
+            var studentToUpdate = await GetStudentAsync(student.StudentId);
+            if (studentToUpdate != null)
+            {
+                studentToUpdate.FirstName = student.FirstName;
+                studentToUpdate.LastName = student.LastName;
+                studentToUpdate.Gender = student.Gender;
+
+            }
         }
     }
 }

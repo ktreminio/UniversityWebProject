@@ -1,6 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using Kevin.Treminio.University.Service.Application.Interfaces;
 using Kevin.Treminio.University.Service.Application.Mappers;
+using Kevin.Treminio.University.Service.Application.Services;
 using Kevin.Treminio.University.Service.Application.Validators;
 
 namespace Kevin.Treminio.University.Service.Application.Extensions
@@ -21,8 +22,10 @@ namespace Kevin.Treminio.University.Service.Application.Extensions
             services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<EnrollmentForUpdateDtoValidator>());
 
             services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<InstructorForCreationDtoValidator>());
+            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<InstructorForUpdateDtoValidator>());
 
             services.AddTransient<IValidationService, ValidationService>();
+            services.AddScoped<IUniversityApplicationService, UniversityApplicationService>();
         }
     }
 }

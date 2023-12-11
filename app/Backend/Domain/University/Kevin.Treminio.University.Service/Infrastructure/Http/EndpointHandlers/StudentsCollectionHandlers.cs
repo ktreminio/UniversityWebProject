@@ -27,5 +27,20 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Http.EndpointHandlers
 
             return TypedResults.Ok(result.StudentsCollection);
         }
+
+        public static async Task<Results<BadRequest, CreatedAtRoute<IEnumerable<StudentDto>>>> CreateStudentCollectionAsync(
+            [FromServices] IUniversityApplicationService universityApplicationService,
+            [FromBody] IEnumerable<StudentForCreationDto> studentCollection
+        )
+        {
+            if (studentCollection == null)
+            {
+                return TypedResults.BadRequest();
+            }
+
+            var result = await universityApplicationService.CreateStudentCollectionAsync(studentCollection);
+
+            return TypedResults.CreatedAtRoute(result.StudentsCollection, $"GetStudentCollection", new { studentIds = result.StudentIdsAsString });
+        }
     }
 }

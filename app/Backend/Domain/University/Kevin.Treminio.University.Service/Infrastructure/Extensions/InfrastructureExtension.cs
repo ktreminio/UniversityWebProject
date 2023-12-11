@@ -1,4 +1,6 @@
-﻿using Kevin.Treminio.University.Service.Infrastructure.Persistence.Extensions;
+﻿using Kevin.Treminio.University.Service.Infrastructure.Http.Extensions;
+using Kevin.Treminio.University.Service.Infrastructure.Persistence.Extensions;
+using Kevin.Treminio.University.Service.Infrastructure.Security.Extensions;
 
 namespace Kevin.Treminio.University.Service.Infrastructure.Extensions
 {
@@ -13,7 +15,9 @@ namespace Kevin.Treminio.University.Service.Infrastructure.Extensions
             var options = new InfrastructureOptions();
             configure(options);
 
+            services.AddHttpResult();
             services.AddPersistence(o => o.ConnectionString = options.ConnectionString);
+            services.AddSecurity();
         }
     }
 }
